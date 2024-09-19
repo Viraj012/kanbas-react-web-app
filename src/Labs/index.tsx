@@ -8,6 +8,7 @@ export default function Labs() {
     return (
       <div >
         <h1>Vishal Singh Rajpurohit</h1>
+        <h1>Section 3</h1>
         <h1>Labs</h1>
         <TOC />
       <Routes>
