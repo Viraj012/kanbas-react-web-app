@@ -1,0 +1,419 @@
+body   {  margin: 0;  padding: 0;  }
+body * {  font-family: Arial, Helvetica, sans-serif;  }
+
+@media (min-width: 768px) {
+  #wd-kanbas .wd-main-content-offset {
+    padding-left: 140px !important;
+  }
+}
+
+.list-group.wd > .list-group-item.active {
+  color: black;
+  background-color: white;
+  border-left: 3px solid black !important;
+}
+
+.btn-secondary {
+  --bs-btn-color: #000 !important;
+  --bs-btn-bg: #c7cdd1 !important;
+  --bs-btn-border-color: #c7cdd1 !important;
+}
+.bg-secondary {
+  --bs-secondary-rgb: 199, 205, 209;
+}
+.list-group-item {
+  --bs-list-group-border-color: gray;
+}
+.wd-lesson {
+  border-left: 3px solid green !important;
+}
+.modules-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.content-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.modules-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.modules-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.module {
+  background-color: #f8f9fa;
+  margin-bottom: 15px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+.module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #e9ecef;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.module-title {
+  font-weight: bold;
+}
+
+.module-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.check-icon {
+  color: #28a745;
+}
+
+.lesson-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.lesson {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.lesson:last-child {
+  border-bottom: none;
+}
+
+.btn-light {
+  background-color: transparent;
+  color: #6c757d;
+}
+
+.btn-sm {
+  padding: 2px 5px;
+  font-size: 0.875rem;
+}
+
+.side-panel {
+  width: 250px;
+}
+
+.side-panel h3 {
+  margin-top: 0;
+}
+
+.status-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.side-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.side-actions .btn {
+  text-align: left;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+#jskdhf
+
+.assignments-container {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.assignments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.search-icon {
+  color: #6c757d;
+  margin-right: 10px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-secondary {
+  background-color: #f8f9fa;
+  color: #212529;
+  border: 1px solid #dee2e6;
+}
+
+
+
+.assignments-list {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+.assignments-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.title-left, .title-right {
+  display: flex;
+  align-items: center;
+}
+
+.assignments-title h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.total-percentage {
+  background-color: #e9ecef;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6c757d;
+  font-size: 18px;
+  padding: 0 5px;
+}
+
+.assignments {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.assignment-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.assignment-left, .assignment-right {
+  display: flex;
+  align-items: center;
+}
+
+.grip-icon, .file-icon {
+  color: #6c757d;
+  margin-right: 15px;
+  font-size: 18px;
+}
+
+.assignment-details {
+  flex-grow: 1;
+}
+
+.assignment-details h3 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.assignment-module {
+  color: #cf0c20;
+  margin-right: 10px;
+}
+
+.assignment-availability,
+.assignment-due {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.check-icon {
+  color: #28a745;
+  margin-right: 15px;
+  font-size: 18px;
+}
+
+#signin
+
+.wd-kanbas-nav-item.active {
+  background-color: white;
+}
+
+.wd-kanbas-nav-item.active .wd-kanbas-nav-link {
+  color: red;
+}
+
+.wd-kanbas-nav-item.active .wd-kanbas-nav-icon {
+  color: red;
+}
+
+
+#assignedit
+
+.assignment-description,
+.online-entry-options,
+.assign-section {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.online-entry-options p,
+.assign-section > label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.assign-section > div {
+  margin-bottom: 15px;
+}
+
+.assign-section p {
+  margin-bottom: 5px;
+}
+
+.assign-section {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.assign-section > label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.assign-content {
+ 
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.assign-to, .due-date, .availability {
+  margin-bottom: 15px;
+}
+
+.assign-to p, .due-date p, .availability p {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.everyone-tag {
+  display: inline-block;
+  background-color: #e9ecef;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.everyone-tag .fa-times {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.date-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.date-input input {
+  flex-grow: 1;
+  padding-right: 30px;
+}
+
+.calendar-icon {
+  position: absolute;
+  right: 10px;
+  color: #6c757d;
+}
+
+.availability {
+  display: flex;
+  justify-content: space-between;
+}
+
+.available-from, .until {
+  width: 48%;
+}
