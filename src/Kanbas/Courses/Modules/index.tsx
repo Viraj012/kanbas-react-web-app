@@ -1,7 +1,15 @@
 import React from 'react';
+import { useParams } from "react-router";
 import GreenCheckmark from "./GreenCheckmark";
+import * as db from "../../Database";
+import { BsGripVertical } from "react-icons/bs";
+import ModuleControlButtons from './ModuleControlButtons';
+import LessonControlButtons from './LessonControlButtons';
 function Modules() {
-  return (
+ 
+  const { cid } = useParams();
+  const modules = db.modules;
+   return (
     <div className="modules-container">
       <div className="content-wrapper">
         <div className="main-content">
@@ -13,89 +21,34 @@ function Modules() {
             </div>
             <button className="btn btn-danger">+ Module</button>
           </div>
-          <ul className="modules-list" >
-            
-            <li className="module">
-              <div className="module-header"  >
-                <span className="module-title">Week 1</span>
-                <div className="module-actions">
-                <GreenCheckmark />
-                  <button className="btn btn-sm btn-light">+</button>
-                  <button className="btn btn-sm btn-light">⋮</button>
-                </div>
+          <ul id="wd-modules" className="list-group rounded-0">
+        {modules
+          .filter((module: any) => module.course === cid)
+          .map((module: any) => (
+            <li
+              key={module._id}
+              className="wd-module list-group-item p-0 mb-5 fs-5 border-gray"
+            >
+              <div className="wd-title p-3 ps-2 bg-secondary">
+                <BsGripVertical className="me-2 fs-3" /> {module.name}{" "}
+                <ModuleControlButtons />
               </div>
-              <ul className="lesson-list">
-                <li className="lesson">
-                  <span className="lesson-title">LEARNING OBJECTIVES</span>
-                  <div className="module-actions">
-                  <GreenCheckmark />
-                  <button className="btn btn-sm btn-light">⋮</button>
-                  </div>
-                </li>
-                <li className="lesson">
-                  <span className="lesson-title">Introduction to the course</span>
-                  <div className="module-actions">
-                  <GreenCheckmark />
-                  <button className="btn btn-sm btn-light">⋮</button>
-                  </div>
-                </li>
-                <li className="lesson">
-                  <span className="lesson-title">Learn what is Web Development</span>
-                  <div className="module-actions">
-                  <GreenCheckmark />
-                  <button className="btn btn-sm btn-light">⋮</button>
-                  </div>
-                </li>
-                <li className="lesson">
-                  <span className="lesson-title">Introduction to Web Developmen</span>
-                  <div className="module-actions">
-                  <GreenCheckmark />
-                  <button className="btn btn-sm btn-light">⋮</button>
-                  </div>
-                </li>
-                <li className="lesson">
-                  <span className="lesson-title">Creating an HTTP server with Node.js</span>
-                  <div className="module-actions">
-                  <GreenCheckmark />
-                  <button className="btn btn-sm btn-light">⋮</button>
-                  </div>
-                </li>
-              </ul>
+              {module.lessons && (
+                <ul className="wd-lessons list-group rounded-0">
+                  {module.lessons.map((lesson: any) => (
+                    <li
+                      key={lesson._id}
+                      className="wd-lesson list-group-item p-3 ps-1"
+                    >
+                      <BsGripVertical className="me-2 fs-3" /> {lesson.description}{" "}
+                      <LessonControlButtons />
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
-            <li className="module">
-              <div className="module-header">
-                <span className="module-title">Week 2</span>
-                <div className="module-actions">
-                <GreenCheckmark />
-                  <button className="btn btn-sm btn-light">+</button>
-                  <button className="btn btn-sm btn-light">⋮</button>
-                </div>
-              </div>
-              <ul className="lesson-list">
-                <li className="lesson">
-                  <span className="lesson-title">LEARNING OBJECTIVES</span>
-                  <div className="module-actions">
-                  <GreenCheckmark />
-                  <button className="btn btn-sm btn-light">⋮</button>
-                  </div>
-                </li>
-                <li className="lesson">
-                  <span className="lesson-title"> ⁠Learn how to create user interfaces with HTML</span>
-                  <div className="module-actions">
-                  <GreenCheckmark />
-                  <button className="btn btn-sm btn-light">⋮</button>
-                  </div>
-                </li>
-                <li className="lesson">
-                  <span className="lesson-title">Deploy the assignment to Netlify o SLIDES</span>
-                  <div className="module-actions">
-                  <GreenCheckmark />
-                  <button className="btn btn-sm btn-light">⋮</button>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          ))}
+      </ul>
         </div>
         <div className="side-panel" >
           <h3>Course Status</h3>

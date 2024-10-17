@@ -1,8 +1,39 @@
 import React from 'react';
 import { FaTimes, FaCalendarAlt } from 'react-icons/fa';
+import { useParams } from "react-router";
+import * as db from "../../Database";
+import { Link } from "react-router-dom";
 
 function AssignmentEditor() {
+  const { aid, cid } = useParams();
+  const assignments = db.assignments;
+  const assignment = assignments.find((a) => a._id === aid);
+  if (!assignment) return <div>Assignment Not Found</div>;
   return (
+    <div id="wd-assignments-editor" className="container">
+    <label htmlFor="wd-name">Assignment Name</label>
+    <input
+      id="wd-name"
+      value={assignment.title}
+      className="form-control mt-2"
+    />
+
+    <textarea
+      id="wd-description"
+      cols={60}
+      rows={5}
+      className="form-control mt-4"
+    >
+      {assignment.description}
+    </textarea>
+    <br />
+
+
+
+
+
+
+    
     <div className="wd-assignments-editor">
       <div className="form-group">
         <label htmlFor="wd-name">Assignment Name</label>
@@ -118,8 +149,27 @@ function AssignmentEditor() {
         </div>
         <br/>
         <div className="button-group">
-        <button className="btn btn-secondary">Cancel</button> &nbsp;
-        <button className="btn btn-danger">Save</button>
+        <div className="float-end">
+        <Link to={`/Kanbas/Courses/${cid}/Assignments`}>
+          <button
+            id="wd-cancel-btn"
+            type="button"
+            className="btn btn-light border border-gray me-3"
+          >
+            Cancel
+          </button>
+        </Link>
+        <Link to={`/Kanbas/Courses/${cid}/Assignments`}>
+          <button
+            id="wd-save-btn"
+            type="button"
+            className="btn btn-danger px-4"
+          >
+            Save
+          </button>
+        </Link>
+      </div>
+    </div>
       </div>
     </div>
       
