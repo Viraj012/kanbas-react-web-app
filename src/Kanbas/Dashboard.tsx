@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import * as db from "./Database";
 import { useDispatch, useSelector } from "react-redux";
 import { enroll, unenroll } from "./Courses/Home/reducer";
 
@@ -83,7 +82,8 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse,
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
           {(enrollmentFilterOn
-            ? courses.filter((course) => isEnrolled(course))
+            ? courses
+            // .filter((course) => isEnrolled(course))
             : courses
           ).map((course) => (
             <div
