@@ -12,8 +12,11 @@ import * as userClient from "./Account/client";
 import Session from "./Account/Session";
 import { useSelector } from "react-redux";
 import * as courseClient from "./Courses/client";
+import { setEnrollments } from "./Courses/Home/reducer";
 export default function Kanbas() {
     const [courses, setCourses] = useState<any[]>([]);
+    const [enrollmentFilterOn, setEnrollmentFilterOn] = useState(true);
+
     const [course, setCourse] = useState<any>({
       _id: "1234", name: "New Course", number: "New Number",
       startDate: "2023-09-10", endDate: "2023-12-15", description: "New Description",
@@ -27,9 +30,30 @@ export default function Kanbas() {
         console.error(error);
       }
     };
+    const fetchAllCourses = async () => {
+      try {
+        const courses = await courseClient.fetchAllCourses();
+        setCourses(courses);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    const fetchAllEnrollments = async () => {
+      try {
+        const enrollments = await courseClient.fetchAllEnrollments();
+        dispatch(setEnrollments(enrollments));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
     useEffect(() => {
-      fetchCourses();
-    }, [currentUser]);
+      enrollmentFilterOn ? fetchCourses() : fetchAllCourses();
+    }, [currentUser, enrollmentFilterOn]);
+  
+    useEffect(() => {
+      fetchAllEnrollments();
+    }, []);
   
     const addNewCourse = async() => {
       const newCourse = await userClient.createCourse(course);
@@ -67,6 +91,8 @@ export default function Kanbas() {
               courses={courses}
               course={course}
               setCourse={setCourse}
+              enrollmentFilterOn={enrollmentFilterOn}
+              setEnrollmentFilterOn={setEnrollmentFilterOn}
               addNewCourse={addNewCourse}
               deleteCourse={deleteCourse}
               updateCourse={updateCourse}/> </ProtectedRoute>}  />
@@ -80,3 +106,7 @@ export default function Kanbas() {
         </Session>
     );
 }
+function dispatch(arg0: any) {
+  throw new Error("Function not implemented.");
+}
+

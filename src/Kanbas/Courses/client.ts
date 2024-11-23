@@ -57,7 +57,6 @@ export const updateCourse = async (course: any) => {
     );
     return response.data;
   };
-  
   export const unenrollUserFromCourse = async (courseId: string) => {
     const response = await axiosWithCredentials.post(
       `${ENROLLMENTS_API}/unenroll/${courseId}`,
