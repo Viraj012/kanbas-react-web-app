@@ -8,15 +8,30 @@ import { IoEllipsisVertical } from 'react-icons/io5';
 import GreenCheckmark from '../Modules/GreenCheckmark';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { removeAssignment } from './reducer';
+import { setAssignments, removeAssignment } from './reducer';
 import { BiSearch } from "react-icons/bi";
-
+import * as coursesClient from "../client";
+import { useState, useEffect } from "react";
+import * as assignmentClient from "./client";
 function Assignments() {
   const { cid } = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
 
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const delAssignment = async (assignmentId: string) => {
+    await assignmentClient.deleteAssignment(assignmentId);
+    dispatch(removeAssignment(assignmentId));
+  };
+
+  const fetchAssignment = async () => {
+    const modules = await coursesClient.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(modules));
+  };
+  useEffect(() => {
+    fetchAssignment();
+  }, []);
+
 
   return (
     <div id="wd-assignments" className="container">
@@ -73,7 +88,7 @@ function Assignments() {
 
       <ul id="wd-assignment-list" className="list-group rounded-0">
         {assignments
-          .filter((assignment: any) => assignment.course === cid)
+          
           .map((assignment: any) => (
             <li
               key={assignment._id}
@@ -105,7 +120,7 @@ function Assignments() {
                 {currentUser.role === "FACULTY" && (
                   <FaTrash
                     className="text-danger me-2 mb-1"
-                    onClick={() => dispatch(removeAssignment(assignment._id))}
+                    onClick={() => delAssignment(assignment._id)}
                   />
                 )}
                 <GreenCheckmark />

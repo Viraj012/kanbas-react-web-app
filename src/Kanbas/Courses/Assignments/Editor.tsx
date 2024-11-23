@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { createAssignment, updateAssignment } from './reducer';
+import * as coursesClient from "../client";
+import * as assignmentClient from "./client";
 
 function AssignmentEditor() {
   const { aid, cid } = useParams();
@@ -28,11 +30,26 @@ function AssignmentEditor() {
         }
   );
 
+  const createAssignmentForCourse = async () => {
+    if (!cid) return;
+    const newAssignment = { ...assignment, course: cid };
+    const assignmentRes = await coursesClient.createAssignmentForCourse(
+      cid,
+      newAssignment
+    );
+    dispatch(createAssignment(assignmentRes));
+  };
+  const saveAssignment = async (assignment: any) => {
+    await assignmentClient.updateAssignment(assignment);
+    dispatch(updateAssignment(assignment));
+  };
+
+
   const onSave = () => {
       if (aid === "create") {
-        dispatch(createAssignment(assignment));
+        createAssignmentForCourse();
       } else {
-        dispatch(updateAssignment(assignment));
+        saveAssignment(assignment);
       }
       navigate(`/Kanbas/Courses/${cid}/Assignments`);
   
