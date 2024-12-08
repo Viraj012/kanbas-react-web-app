@@ -1,37 +1,39 @@
-import React from 'react';
-import * as db from "../../Database";
-import { useParams } from "react-router";
-import { LuFileEdit } from "react-icons/lu";
 import { BsGripVertical } from "react-icons/bs";
-import { FaSearch, FaEllipsisV, FaCheckCircle, FaGripVertical, FaFileAlt, FaPlus, FaTrash } from 'react-icons/fa';
-import { IoEllipsisVertical } from 'react-icons/io5';
-import GreenCheckmark from '../Modules/GreenCheckmark';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { setAssignments, removeAssignment } from './reducer';
 import { BiSearch } from "react-icons/bi";
+import { LuFileEdit } from "react-icons/lu";
+import { IoEllipsisVertical } from "react-icons/io5";
+import { FaPlus } from "react-icons/fa6";
+import { FaTrash } from "react-icons/fa";
+import GreenCheckmark from "../Modules/GreenCheckmark";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAssignment, setAssignments } from "./reducer";
+import { useEffect } from "react";
 import * as coursesClient from "../client";
-import { useState, useEffect } from "react";
-import * as assignmentClient from "./client";
+import * as assignmentsClient from "./client";
+
 function Assignments() {
   const { cid } = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
 
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const delAssignment = async (assignmentId: string) => {
-    await assignmentClient.deleteAssignment(assignmentId);
-    dispatch(removeAssignment(assignmentId));
+
+  const removeAssignment = async (assignmentId: string) => {
+    await assignmentsClient.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
   };
 
-  const fetchAssignment = async () => {
-    const modules = await coursesClient.findAssignmentsForCourse(cid as string);
-    dispatch(setAssignments(modules));
+  const fetchAssignments = async () => {
+    const assignments = await coursesClient.findAssignmentsForCourse(
+      cid as string
+    );
+    dispatch(setAssignments(assignments));
   };
   useEffect(() => {
-    fetchAssignment();
+    fetchAssignments();
   }, []);
-
 
   return (
     <div id="wd-assignments" className="container">
@@ -57,7 +59,7 @@ function Assignments() {
             <Link
               id="wd-add-assignment"
               className="btn btn-danger"
-              to={`/Kanbas/Courses/${cid}/Assignments/create`}
+              to={`/Kanbas/Courses/${cid}/Assignments/new`}
             >
               + Assignment
             </Link>
@@ -87,47 +89,45 @@ function Assignments() {
       </div>
 
       <ul id="wd-assignment-list" className="list-group rounded-0">
-        {assignments
-          
-          .map((assignment: any) => (
-            <li
-              key={assignment._id}
-              className="wd-assignment-list-item list-group-item p-3 ps-1 d-flex justify-content-between align-items-center"
-            >
-              <div className="d-flex align-items-center">
-                <BsGripVertical className="me-2 fs-3" />
-                <LuFileEdit className="me-2 fs-3 text-success" />
-                <div>
-                  {currentUser.role === "FACULTY" ? (
-                    <a
-                      className="wd-assignment-link"
-                      href={`#/Kanbas/Courses/${assignment.course}/Assignments/${assignment._id}`}
-                    >
-                      {`${assignment._id} - ${assignment.title}`}
-                    </a>
-                  ) : (
-                    <span className="wd-assignment-link">
-                      {`${assignment._id} - ${assignment.title}`}
-                    </span>
-                  )}
-                  <br />
-                  Multiple Modules | <b>Not available</b> until{" "}
-                  {assignment["available-from"]} at 12:00am | <b>Due</b>{" "}
-                  {assignment["due-date"]} at 11:59pm | {assignment.points} pts
-                </div>
-              </div>
-              <div className="float-end d-flex align-items-center">
-                {currentUser.role === "FACULTY" && (
-                  <FaTrash
-                    className="text-danger me-2 mb-1"
-                    onClick={() => delAssignment(assignment._id)}
-                  />
+        {assignments.map((assignment: any) => (
+          <li
+            key={assignment._id}
+            className="wd-assignment-list-item list-group-item p-3 ps-1 d-flex justify-content-between align-items-center"
+          >
+            <div className="d-flex align-items-center">
+              <BsGripVertical className="me-2 fs-3" />
+              <LuFileEdit className="me-2 fs-3 text-success" />
+              <div>
+                {currentUser.role === "FACULTY" ? (
+                  <a
+                    className="wd-assignment-link"
+                    href={`#/Kanbas/Courses/${assignment.course}/Assignments/${assignment._id}`}
+                  >
+                    {`${assignment._id} - ${assignment.title}`}
+                  </a>
+                ) : (
+                  <span className="wd-assignment-link">
+                    {`${assignment._id} - ${assignment.title}`}
+                  </span>
                 )}
-                <GreenCheckmark />
-                <IoEllipsisVertical className="fs-4" />
+                <br />
+                Multiple Modules | <b>Not available</b> until{" "}
+                {assignment["available-from"]} at 12:00am | <b>Due</b>{" "}
+                {assignment["due-date"]} at 11:59pm | {assignment.points} pts
               </div>
-            </li>
-          ))}
+            </div>
+            <div className="float-end d-flex align-items-center">
+              {currentUser.role === "FACULTY" && (
+                <FaTrash
+                  className="text-danger me-2 mb-1"
+                  onClick={() => removeAssignment(assignment._id)}
+                />
+              )}
+              <GreenCheckmark />
+              <IoEllipsisVertical className="fs-4" />
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );
