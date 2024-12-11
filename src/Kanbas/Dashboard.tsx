@@ -42,7 +42,28 @@ function Dashboard({
     // );
   };
 
+  // const unenrollCourse = async (courseId: string) => {
+  //   console.log("unenroll", courseId);
 
+  //   await coursesClient.unenrollUserFromCourse(courseId);
+  //   dispatch(
+  //     unenroll({
+  //       user: currentUser._id,
+  //       course: courseId,
+  //     })
+  //   );
+  // };
+
+  // const enrollCourse = async (courseId: string) => {
+  //   console.log("Enroll", courseId);
+  //   await coursesClient.enrollUserInCourse(courseId);
+  //   dispatch(
+  //     enroll({
+  //       user: currentUser._id,
+  //       course: courseId,
+  //     })
+  //   );
+  // };
 
   console.log(courses);
 
@@ -116,7 +137,7 @@ function Dashboard({
                 >
                   <img
                     src={
-                    "/images/reactjs.jpg"
+                      "/images/reactjs.jpg"
                     }
                     width="100%"
                     height={160}
@@ -124,7 +145,7 @@ function Dashboard({
                   />
                   <div className="card-body">
                     <h5 className="wd-dashboard-course-title card-title">
-                      {enrolling && currentUser.role !== "ADMIN"  && (
+                      {enrolling && (
                         <button
                           onClick={(event) => {
                             event.preventDefault();

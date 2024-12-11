@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { enrollments } from "../../Database";
 
 const initialState = {
   enrollments: [],
@@ -18,11 +17,13 @@ const enrollmentsSlice = createSlice({
         user: enrollment.user,
         course: enrollment.course,
       };
-      state.enrollments = [...state.enrollments, newEnrollment] as any;;
+      state.enrollments = [...state.enrollments, newEnrollment] as any;
+      console.log(newEnrollment, state.enrollments);
     },
     unenroll: (state, { payload: enrollment }) => {
       state.enrollments = state.enrollments.filter(
-        (e:any) => !(e.user === enrollment.user && e.course === enrollment.course)
+        (e: any) =>
+          !(e.user === enrollment.user && e.course === enrollment.course)
       );
     },
   },

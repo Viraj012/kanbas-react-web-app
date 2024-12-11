@@ -40,6 +40,10 @@ function Kanbas() {
         currentUser._id
       );
 
+      console.log("EC", enrolledCourses);
+      console.log("AC", allCourses);
+
+
       const courses = allCourses.map((course: any) => {
         if (enrolledCourses.find((c: any) => c._id === course._id)) {
           return { ...course, enrolled: true };
